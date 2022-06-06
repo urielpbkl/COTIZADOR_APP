@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
-import ImagenCripto from './img/imagen-criptos.png'
 import { Formulario } from './components/Formulario'
 import { Resultado } from './components/Resultado'
 import { Spinner } from './components/Spinner'
@@ -44,14 +43,14 @@ const Heading = styled.h1`
 
 function App() {
 
-  const [monedas, setMonedas] = useState({})
+  const [monedas, setMonedas] = useState({}) //ES EL "state" QUE VA A CONTENER LOS DATOS DE LAS CRIPTOS DE LADIVISA
   const [cotizacion, setCotizacion] = useState({})
-  const [cargando, setCargando] = useState(false)
+  const [cargando, setCargando] = useState(false) //PARA MOSTRAR EL SPINNER
 
   useEffect(() => {
     if (Object.keys(monedas).length > 0) {
       const cotizarCripto = async () => {
-        setCotizacion({})
+        setCotizacion({}) //REINICIAMOS EL OBJETO QUE CONTIENE LOS DATOS DE COTIZACIÓN CADA QUE EJECUTEMOS UNA CONSULTA
         setCargando(true) //MOSTRAMOS EL SPINNER
         const { moneda, criptomoneda } = monedas //HACEMOS "object destructuring" EN EL OBJECTO "monedas" QUE SE LLENA EN EL COMPONENTE "Formulario" A TRAVÉS DEL HOOK "useState" DECLARADO ARRIBA
         const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${criptomoneda}&tsyms=${moneda}` //ACCEDEMOS A LA "url" DE LA API
@@ -68,7 +67,7 @@ function App() {
 
   return (
     <Contenedor>
-      
+
       {cotizacion.PRICE ? ( /* SI TENEMOS UNA COTIZACIÓN LA MOSTRAMOS*/
         <Resultado cotizacion={cotizacion} />  
       ) : (
